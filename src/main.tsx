@@ -27,4 +27,15 @@ const element = {
 const container = document.getElementById("root") as HTMLElement;
 
 // Reactをコンテナにレンダリング
-ReactDOM.createRoot(container).render(<React.StrictMode>{element}</React.StrictMode>);
+// ReactDOM.createRoot(container).render(<React.StrictMode>{element}</React.StrictMode>);
+
+// DOMコンテナに付与する子ノードと子要素を定義する
+const node = document.createElement(element.type);
+node["title"] = element.props.title;
+
+// 今回は文字列のみ
+const text = document.createTextNode("");
+text["nodeValue"] = element.props.children;
+
+node.appendChild(text);
+container.appendChild(node);
