@@ -9,7 +9,17 @@ const createElement = (type: string, props: {}, ...children: ReactNode[]) => ({
   type,
   props: {
     ...props,
-    children,
+    children: children.map((child) =>
+      typeof child === "object" ? child : createTextElement(child)
+    ),
+  },
+});
+
+const createTextElement = (text: string | number | boolean | undefined) => ({
+  type: "TEXT_ELEMENT",
+  props: {
+    nodeValue: text,
+    children: [],
   },
 });
 
